@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KHADMEEN WISER | Digital Solutions</title>
+    <meta
+      name="description"
+      content="KHADMEEN WISER delivers modern web design, computer support, and digital services with a strong focus on quality and client satisfaction."
+    />
+    <style>
+      :root {
+        --bg: #06131f;
+        --panel: rgba(10, 21, 32, 0.8);
+        --panel-strong: #0f1d2a;
+        --panel-soft: #162a3a;
+        --text: #eaf6ff;
+        --muted: #a9c3d5;
+        --primary: #58d0ff;
+        --primary-strong: #0ea5e9;
+        --accent: #9b8cff;
+        --success: #67e8a7;
+        --border: rgba(255, 255, 255, 0.09);
+        --shadow: 0 20px 40px rgba(8, 18, 32, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(88, 208, 255, 0.16), transparent 25%),
+          radial-gradient(circle at bottom right, rgba(155, 140, 255, 0.18), transparent 30%),
+          linear-gradient(135deg, var(--bg), #0b1d2d 40%, #09131d 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(6, 19, 31, 0.76);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 78px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #03101d;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        box-shadow: var(--shadow);
+      }
+
+      .floating-logo {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 30;
+        width: 76px;
+        height: 76px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 26px;
+        background: linear-gradient(145deg, #66dcff, #438cf5 58%, #a184ff);
+        box-shadow: 0 12px 32px rgba(32, 155, 229, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        animation: logo-float 4s ease-in-out infinite;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .floating-logo::before {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        z-index: -1;
+        border: 1px solid rgba(88, 208, 255, 0.35);
+        border-radius: 31px;
+        animation: logo-glow 3s ease-in-out infinite;
+      }
+
+      .floating-logo:hover,
+      .floating-logo:focus-visible {
+        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 18px 38px rgba(32, 155, 229, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      }
+
+      .floating-logo:focus-visible {
+        outline: 3px solid var(--text);
+        outline-offset: 7px;
+      }
+
+      .floating-logo svg {
+        width: 49px;
+        height: 49px;
+        filter: drop-shadow(0 3px 4px rgba(2, 14, 30, 0.25));
+      }
+
+      .floating-logo-label {
+        position: absolute;
+        right: 88px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--text);
+        background: rgba(10, 21, 32, 0.94);
+        box-shadow: var(--shadow);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(6px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        pointer-events: none;
+      }
+
+      .floating-logo:hover .floating-logo-label,
+      .floating-logo:focus-visible .floating-logo-label {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      @keyframes logo-float {
+        0%, 100% { translate: 0 0; }
+        50% { translate: 0 -9px; }
+      }
+
+      @keyframes logo-glow {
+        0%, 100% { opacity: 0.45; transform: scale(0.98); }
+        50% { opacity: 1; transform: scale(1.04); }
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        color: var(--muted);
+      }
+
+      .nav a {
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      .nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .nav a:hover::after,
+      .nav a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .button,
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.9rem 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .button:hover,
+      button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        color: #041723;
+        box-shadow: 0 10px 30px rgba(8, 159, 219, 0.35);
+      }
+
+      .button-secondary {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      .hero {
+        padding: 72px 0 48px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        background: rgba(88, 208, 255, 0.12);
+        border: 1px solid rgba(88, 208, 255, 0.3);
+        color: var(--primary);
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        margin: 0 0 20px;
+        font-size: clamp(2.6rem, 4vw, 5rem);
+        line-height: 1.05;
+        letter-spacing: -0.06em;
+      }
+
+      .headline-accent {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .lead {
+        max-width: 620px;
+        font-size: 1.08rem;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .mini-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .mini-meta strong {
+        color: var(--text);
+        font-size: 1.1rem;
+      }
+
+      .showcase {
+        position: relative;
+        min-height: 500px;
+      }
+
+      .orb {
+        position: absolute;
+        inset: 12% auto auto 8%;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, rgba(88, 208, 255, 0.95), rgba(88, 208, 255, 0.12) 45%, transparent 70%);
+        filter: blur(10px);
+      }
+
+      .dashboard {
+        position: relative;
+        margin: 28px auto 0;
+        width: min(100%, 430px);
+        background: rgba(13, 23, 35, 0.86);
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .dashboard-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dots span {
+        width: 11px;
+        height: 11px;
+        display: block;
+        border-radius: 50%;
+      }
+
+      .dots span:nth-child(1) { background: #ff6b6b; }
+      .dots span:nth-child(2) { background: #ffd93d; }
+      .dots span:nth-child(3) { background: #67e8a7; }
+
+      .monitor {
+        background: linear-gradient(135deg, rgba(17, 32, 45, 0.9), rgba(12, 22, 34, 0.9));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        padding: 18px;
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .stat-card {
+        border-radius: 16px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .stat-card small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .stat-card strong {
+        font-size: 1.7rem;
+      }
+
+      .chart {
+        height: 118px;
+        border-radius: 16px;
+        background:
+          linear-gradient(180deg, rgba(88, 208, 255, 0.22), rgba(88, 208, 255, 0.06)),
+          linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+        border: 1px solid rgba(255,255,255,0.04);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart::before {
+        content: "";
+        position: absolute;
+        inset: 18px 16px 10px 16px;
+        background: linear-gradient(180deg, transparent 0%, rgba(88, 208, 255, 0.3) 100%);
+        clip-path: polygon(0 85%, 15% 70%, 30% 72%, 46% 42%, 62% 58%, 78% 22%, 100% 35%, 100% 100%, 0 100%);
+      }
+
+      section {
+        padding: 52px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        margin: 0;
+        letter-spacing: -0.05em;
+      }
+
+      .section-heading p {
+        margin: 0;
+        max-width: 480px;
+        color: var(--muted);
+      }
+
+      .services-grid,
+      .feature-grid,
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .service-card,
+      .feature-card,
+      .stat-box {
+        background: rgba(15, 26, 35, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .service-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, rgba(88, 208, 255, 0.22), rgba(155, 140, 255, 0.2));
+      }
+
+      .service-card h3,
+      .feature-card h3,
+      .stat-box h3 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .service-card p,
+      .feature-card p,
+      .stat-box p,
+      .about-copy,
+      .contact-card p,
+      .footer-note {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .about-panel {
+        background: linear-gradient(180deg, rgba(17, 30, 42, 0.9), rgba(14, 23, 34, 0.9));
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .about-copy {
+        margin-top: 14px;
+      }
+
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 22px 0 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .check-list li {
+        position: relative;
+        padding-left: 30px;
+        color: var(--text);
+      }
+
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(103, 232, 167, 0.15);
+        color: var(--success);
+        font-weight: 800;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 28px;
+      }
+
+      .stat-box strong {
+        display: block;
+        font-size: clamp(2rem, 3vw, 2.7rem);
+        margin-bottom: 8px;
+      }
+
+      .cta-panel {
+        background: linear-gradient(135deg, rgba(88, 208, 255, 0.12), rgba(155, 140, 255, 0.15));
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .cta-panel h3 {
+        margin: 0 0 8px;
+        font-size: clamp(1.7rem, 2vw, 2.3rem);
+        letter-spacing: -0.04em;
+      }
+
+      .cta-panel p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 24px;
+      }
+
+      .contact-card,
+      .contact-form {
+        background: rgba(15, 25, 35, 0.8);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 26px;
+        box-shadow: var(--shadow);
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0 0;
+        display: grid;
+        gap: 18px;
+      }
+
+      .contact-list li {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: var(--text);
+      }
+
+      .icon-pill {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(88, 208, 255, 0.12);
+        display: grid;
+        place-items: center;
+      }
+
+      form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        border-radius: 14px;
+        padding: 0.95rem 1rem;
+        font: inherit;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #9ab1c1;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 138px;
+      }
+
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 26px 0 36px;
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 960px) {
+        .header-inner {
+          flex-wrap: wrap;
+          padding-block: 12px;
+        }
+
+        .hero-grid,
+        .about-grid,
+        .contact-grid,
+        .services-grid,
+        .feature-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-grid,
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .services-grid,
+        .feature-grid,
+        .stats-grid,
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+
+        .header-inner,
+        .cta-panel,
+        .footer-inner,
+        .section-heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero {
+          padding-top: 42px;
+        }
+
+        .cta-panel {
+          padding: 24px;
+        }
+
+        .floating-logo {
+          right: 16px;
+          bottom: 16px;
+          width: 62px;
+          height: 62px;
+          border-radius: 21px;
+        }
+
+        .floating-logo::before {
+          border-radius: 26px;
+        }
+
+        .floating-logo svg {
+          width: 41px;
+          height: 41px;
+        }
+
+        .floating-logo-label {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .floating-logo,
+        .floating-logo::before {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#home" class="brand" aria-label="KHADMEEN WISER home">
+          <span class="brand-mark">K</span>
+          <span>KHADMEEN WISER</span>
+        </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="image.html">Gallery</a>
+          <a href="forms.html">Login</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="button button-secondary" href="#contact">Get in touch</a>
+          <a class="button button-primary" href="Create.html">Create account</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Trusted digital partner</span>
+            <h1>
+              Design that <span class="headline-accent">works</span> and
+              technology that inspires.
+            </h1>
+            <p class="lead">
+              KHADMEEN WISER helps businesses and individuals grow with
+              professional web design, reliable computer services, and a
+              customer-first approach built on trust and results.
+            </p>
+
+            <div class="cta-row">
+              <a class="button button-primary" href="#contact">Book a Consultation</a>
+              <a class="button button-secondary" href="#services">Explore Services</a>
+            </div>
+
+            <div class="mini-meta" aria-label="Highlights">
+              <div><strong>10+</strong><br />Years experience</div>
+              <div><strong>200+</strong><br />Projects delivered</div>
+              <div><strong>24/7</strong><br />Support available</div>
+            </div>
+          </div>
+
+          <div class="showcase" aria-label="Digital dashboard illustration">
+            <div class="orb" aria-hidden="true"></div>
+            <div class="dashboard">
+              <div class="dashboard-header">
+                <div class="dots" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <span style="color: var(--muted); font-size: 0.85rem;">Performance</span>
+              </div>
+
+              <div class="monitor">
+                <div class="stat-grid">
+                  <div class="stat-card">
+                    <small>Website growth</small>
+                    <strong>+48%</strong>
+                  </div>
+                  <div class="stat-card">
+                    <small>Support rate</small>
+                    <strong>96%</strong>
+                  </div>
+                </div>
+                <div class="chart" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="container">
+          <div class="section-heading">
+            <h2>What we do best</h2>
+            <p>
+              Smart digital solutions designed to help you work better, reach
+              more people, and keep your systems running smoothly.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">💻</div>
+              <h3>Web Development</h3>
+              <p>
+                Clean, responsive websites that reflect your brand and convert
+                visitors into loyal customers.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">🛠️</div>
+              <h3>Computer Repairs</h3>
+              <p>
+                Hardware and software troubleshooting, upgrades, and support to
+                keep your technology reliable.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">📦</div>
+              <h3>Business Center</h3>
+              <p>
+                Efficient office services that support communication, printing,
+                and daily business operations.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">🎓</div>
+              <h3>Digital Skills</h3>
+              <p>
+                Practical computer training and digital literacy programs for
+                students and professionals.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container about-grid">
+          <div class="about-panel">
+            <span class="eyebrow">About us</span>
+            <h2 style="margin: 0; font-size: clamp(2rem, 3vw, 3rem); letter-spacing: -0.05em;">
+              Built on trust, service, and smart technology.
+            </h2>
+            <p class="about-copy">
+              At KHADMEEN WISER, we believe everyone deserves digital solutions
+              that feel simple, effective, and dependable. Since our start in
+              Zaria, we have focused on making technology easier to use and
+              more valuable for everyday people and growing businesses.
+            </p>
+
+            <ul class="check-list">
+              <li>Founder-led service with a personal, client-first approach.</li>
+              <li>Focused on dependable web development and computer support.</li>
+              <li>Building lasting relationships through quality and care.</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <strong>200+</strong>
+                <h3>Projects</h3>
+                <p>Beautiful websites and practical digital solutions.</p>
+              </div>
+
+              <div class="stat-box">
+                <strong>96%</strong>
+                <h3>Client satisfaction</h3>
+                <p>Driven by clear communication and reliable work.</p>
+              </div>
+
+              <div class="stat-box">
+                <strong>24/7</strong>
+                <h3>Support</h3>
+                <p>Always ready to help when technology needs attention.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta-panel">
+            <div>
+              <h3>Ready to grow with a digital partner you can trust?</h3>
+              <p>
+                Whether you need a modern website, dependable computer support,
+                or a better digital experience, we are ready to help.
+              </p>
+            </div>
+            <a class="button button-primary" href="#contact">Start today</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container contact-grid">
+          <div class="contact-card">
+            <span class="eyebrow">Contact us</span>
+            <h2 style="margin: 0 0 8px; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.05em;">
+              Let’s build something remarkable.
+            </h2>
+            <p>
+              Reach out for web design, computer services, or consultations.
+            </p>
+
+            <ul class="contact-list">
+              <li>
+                <span class="icon-pill" aria-hidden="true">📞</span>
+                <a href="https://wa.me/2347071111198" target="_blank" rel="noopener noreferrer" aria-label="Chat with KHADMEEN WISER on WhatsApp at plus 234 707 111 1198">(+234) 707 111 1198</a>
+              </li>
+              <li>
+                <span class="icon-pill" aria-hidden="true">✉️</span>
+                <a href="mailto:yusufalameenl013@gmail.com">yusufalameenl013@gmail.com</a>
+              </li>
+              <li>
+                <span class="icon-pill" aria-hidden="true">📍</span>
+                <span>Zaria, Kaduna State, Nigeria</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-form">
+            <form>
+              <div class="field-row">
+                <div>
+                  <label for="name" style="display:block; margin-bottom:8px; color: var(--muted);">Name</label>
+                  <input id="name" type="text" placeholder="Your name" />
+                </div>
+                <div>
+                  <label for="email" style="display:block; margin-bottom:8px; color: var(--muted);">Email</label>
+                  <input id="email" type="email" placeholder="you@example.com" />
+                </div>
+              </div>
+
+              <div>
+                <label for="subject" style="display:block; margin-bottom:8px; color: var(--muted);">Subject</label>
+                <input id="subject" type="text" placeholder="How can we help?" />
+              </div>
+
+              <div>
+                <label for="message" style="display:block; margin-bottom:8px; color: var(--muted);">Message</label>
+                <textarea id="message" placeholder="Tell us about your project or support request..."></textarea>
+              </div>
+
+              <button type="submit" class="button button-primary">Send message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="brand">
+          <span class="brand-mark">K</span>
+          <span>KHADMEEN WISER</span>
+        </div>
+        <p class="footer-note">© <span id="year"></span> KHADMEEN WISER. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <a class="floating-logo" href="#home" aria-label="KHADMEEN WISER, back to top">
+      <span class="floating-logo-label" aria-hidden="true">KHADMEEN WISER</span>
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <path d="M17 12v40M17 34 43 13M25 28l21 24" fill="none" stroke="#06131f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" />
+        <circle cx="49" cy="14" r="5" fill="#f4fbff" />
+        <path d="M47 44h7" stroke="#f4fbff" stroke-linecap="round" stroke-width="3" />
+      </svg>
+    </a>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
